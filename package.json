@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "run-server": "node index.js",
     "run-server-and-watch-changes": "nodemon --inspect ./index.js 33"
   },
@@ -12,8 +13,10 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.4",
+    "index.js": "0.0.3",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
+    "node": "^10.12.0",
     "request": "^2.88.0"
   },
   "devDependencies": {
