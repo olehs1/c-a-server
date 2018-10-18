@@ -5,12 +5,13 @@ const {
 const {
     errorHandler
 } = require('./helpers/error.helper');
+const { routes } = require('./config');
 const express = require('express');
 const request = require("request");
 const app = express();
 
 
-app.get('/currency-rates', function (req, res) {
+app.get(routes.currencyRates, function (req, res) {
     request(getCurrencyRatesRequestOptions(), function (error, response, body) {
         if (!error) {
             res.setHeader('Content-Type', 'application/json');
@@ -21,6 +22,6 @@ app.get('/currency-rates', function (req, res) {
     });
 });
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
+app.listen(3333, function () {
+    console.log('Example app listening on port 3333!');
 });

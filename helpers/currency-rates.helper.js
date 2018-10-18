@@ -1,6 +1,6 @@
 const cheerio = require("cheerio");
 const _ = require("lodash");
-const currencyRatesUrl = 'https://minfin.com.ua/currency/usd';
+const currencyRatesUrl = 'https://minfin.com.ua/currency';
 
 const getCurrencyRatesRequestOptions = () => {
     return {
@@ -13,9 +13,9 @@ const getCurrencyRatesRequestOptions = () => {
 
 const getParsedCurrencyRatesResponse = (body) => {
     const $ = cheerio.load(body);
-    const currencyValueElements = $(".mfm-table .mfm-posr");
-    const usdBuy = getRateByElementIndex(currencyValueElements, 2);
-    const usdSell = getRateByElementIndex(currencyValueElements, 3);
+    const currencyValueElements = $($('.mfm-table .mfm-text-nowrap')[4]).text().split('/');
+    const usdBuy = getRateByIndex(currencyValueElements, 0);
+    const usdSell = getRateByIndex(currencyValueElements, 1);
 
     return {
         usdBuy,
@@ -23,9 +23,9 @@ const getParsedCurrencyRatesResponse = (body) => {
     };
 };
 
-const getRateByElementIndex = (body, index) => {
+const getRateByIndex = (body, index) => {
     return _.toNumber(
-        _.first(cheerio(body[index]).text().split(' '))
+        _.trim(_.nth(body, index)).replace(',', '.')
     );
 };
 
