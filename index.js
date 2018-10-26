@@ -1,27 +1,16 @@
 const {
-    getCurrencyRatesRequestOptions,
-    getParsedCurrencyRatesResponse
-} = require('./helpers/currency-rates.helper');
-const {
-    errorHandler
-} = require('./helpers/error.helper');
+    indexHandler,
+    currencyRatesHandler
+} = require('./routeHandlers');
 const { routes } = require('./config');
 const express = require('express');
-const request = require("request");
 const app = express();
 
+app.get(routes.index, indexHandler);
+app.get(routes.currencyRates, currencyRatesHandler);
 
-app.get(routes.currencyRates, function (req, res) {
-    request(getCurrencyRatesRequestOptions(), function (error, response, body) {
-        if (!error) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(getParsedCurrencyRatesResponse(body)));
-        } else {
-            res.send(JSON.stringify(errorHandler(error)));
-        }
-    });
-});
+const PORT = process.env.PORT || 5000;
 
-app.listen(3333, function () {
-    console.log('Example app listening on port 3333!');
+app.listen(PORT, function () {
+    console.log(`Example app listening on port ${PORT}!`);
 });
