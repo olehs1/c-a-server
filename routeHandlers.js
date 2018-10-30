@@ -6,7 +6,7 @@ const {
 } = require('./helpers/currency-rates.helper');
 const { errorHandler } = require('./helpers/error.helper');
 
-const indexHandler = (req, res) => {
+const rootHandler = (req, res) => {
     res.send('Hello Node!');
 };
 
@@ -22,6 +22,6 @@ const currencyRatesHandler = (req, res) => {
 };
 
 module.exports = {
-    indexHandler,
+    rootHandler,
     currencyRatesHandler
 };

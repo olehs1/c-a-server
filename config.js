@@ -1,5 +1,5 @@
 const routes = {
-    index: '/',
+    root: '/',
     currencyRates: '/currency-rates'
 };
 
