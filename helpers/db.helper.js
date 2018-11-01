@@ -10,14 +10,23 @@ class Database {
     saveCurrencyRates(currencyRates){
         fs.readFile(dbSource, encoding,(err, data) => {
             console.log(data);
-            const result = data + currencyRates + '\r\n';
+            const result = data + currencyRates + ';';
             fs.writeFile(dbSource, result, encoding, (err) => {
                 if (err) throw err;
                 console.log('saved success');
             });
-            // res.writeHead(200, {'Content-Type': 'text/html'});
-            // res.write(data);
-            // res.end();
+        });
+    }
+
+    getCurrencyRates(){
+        return new Promise((resolve, reject) => {
+            fs.readFile(dbSource, encoding,(err, data) => {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(data);
+                }
+            });
         });
     }
 }

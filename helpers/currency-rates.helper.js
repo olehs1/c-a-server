@@ -2,6 +2,8 @@ const request = require("request");
 const cheerio = require("cheerio");
 const _ = require("lodash");
 const currencyRatesUrl = 'https://minfin.com.ua/currency';
+const { errorHandler } = require('./error.helper');
+const db = require('./db.helper');
 
 const getCurrencyRatesRequestOptions = () => {
     return {
@@ -12,7 +14,7 @@ const getCurrencyRatesRequestOptions = () => {
     }
 };
 
-const getCurrencyRates = () => {
+const getCurrencyRatesRequest = () => {
     return new Promise((resolve, reject) => {
         request(getCurrencyRatesRequestOptions(), function (error, response, body) {
             if (!error) {
@@ -44,8 +46,25 @@ const getRateByIndex = (body, index) => {
     );
 };
 
+const getLastCurrencyRates = () => {
+    return new Promise((resolve, reject) => {
+        db.getCurrencyRates().then((currencyRates) => {
+
+            // console.log('currencyRates===>', currencyRates);
+            const arr = _.split(currencyRates, ';');
+            console.log(arr);
+            // const result = _(currencyRates)
+            //     .split(';')
+            //     .map((obj) => JSON.parse(obj))
+            //     .last();
+
+            // console.log(':+', result);
+            resolve({});
+        });
+    });
+};
+
 module.exports = {
-    getCurrencyRatesRequestOptions,
-    getParsedCurrencyRatesResponse,
-    getCurrencyRates
+    getCurrencyRatesRequest,
+    getLastCurrencyRates
 };

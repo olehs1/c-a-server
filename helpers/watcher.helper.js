@@ -1,5 +1,5 @@
 const {
-    getCurrencyRates
+    getCurrencyRatesRequest
 } = require('./currency-rates.helper');
 const db = require('./db.helper');
 
@@ -22,7 +22,7 @@ class Watcher {
             //this.start();
             db.saveCurrencyRates(currencyRates);
         };
-        getCurrencyRates().then(onSuccess);
+        getCurrencyRatesRequest().then(onSuccess);
     }
 }
 
