@@ -49,17 +49,12 @@ const getRateByIndex = (body, index) => {
 const getLastCurrencyRates = () => {
     return new Promise((resolve, reject) => {
         db.getCurrencyRates().then((currencyRates) => {
+            const result = _(currencyRates)
+                .split(';')
+                .filter((obj) => !_.isEmpty(obj))
+                .value();
 
-            // console.log('currencyRates===>', currencyRates);
-            const arr = _.split(currencyRates, ';');
-            console.log(arr);
-            // const result = _(currencyRates)
-            //     .split(';')
-            //     .map((obj) => JSON.parse(obj))
-            //     .last();
-
-            // console.log(':+', result);
-            resolve({});
+            resolve(_.last(result));
         });
     });
 };

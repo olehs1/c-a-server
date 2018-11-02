@@ -9,11 +9,9 @@ class Database {
 
     saveCurrencyRates(currencyRates){
         fs.readFile(dbSource, encoding,(err, data) => {
-            console.log(data);
             const result = data + currencyRates + ';';
             fs.writeFile(dbSource, result, encoding, (err) => {
                 if (err) throw err;
-                console.log('saved success');
             });
         });
     }

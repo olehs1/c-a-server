@@ -1,6 +1,7 @@
 const {
     rootHandler,
-    currencyRatesHandler
+    currencyRatesHandler,
+    lastDateHandler
 } = require('./routeHandlers');
 const { routes } = require('./config');
 const watcher = require('./helpers/watcher.helper');
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.get(routes.root, rootHandler);
 app.get(routes.currencyRates, currencyRatesHandler);
+app.get(routes.lastDate, lastDateHandler);
 
 const PORT = process.env.PORT || 5000;
 

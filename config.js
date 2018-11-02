@@ -1,6 +1,7 @@
 const routes = {
     root: '/',
-    currencyRates: '/currency-rates'
+    currencyRates: '/currency-rates',
+    lastDate: '/last-date'
 };
 
 module.exports = {
