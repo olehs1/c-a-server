@@ -1,4 +1,5 @@
 const moment = require('moment');
+// const indexView = require('./views/index.html');
 
 const {
     getLastCurrencyRates
@@ -6,7 +7,9 @@ const {
 
 const rootHandler = (req, res) => {
     res.send('Hello Node!');
+    // res.render(indexView, { name: 'World' });
 };
+const db = require('./helpers/db.helper');
 
 const currencyRatesHandler = (req, res) => {
     const onSuccess = (lastCurrencyRates) => {
@@ -25,8 +28,14 @@ const lastDateHandler = (req, res) => {
     getLastCurrencyRates().then(onSuccess);
 };
 
+const dbSizeHandler = (req, res) => {
+    const size = db.getSize();
+    res.send(`${size} MB`);
+};
+
 module.exports = {
     rootHandler,
     currencyRatesHandler,
-    lastDateHandler
+    lastDateHandler,
+    dbSizeHandler
 };

@@ -7,7 +7,7 @@ class Database {
 
     }
 
-    saveCurrencyRates(currencyRates){
+    static saveCurrencyRates(currencyRates){
         fs.readFile(dbSource, encoding,(err, data) => {
             const result = data + currencyRates + ';';
             fs.writeFile(dbSource, result, encoding, (err) => {
@@ -16,7 +16,7 @@ class Database {
         });
     }
 
-    getCurrencyRates(){
+    static getCurrencyRates(){
         return new Promise((resolve, reject) => {
             fs.readFile(dbSource, encoding,(err, data) => {
                 if(err){
@@ -27,6 +27,13 @@ class Database {
             });
         });
     }
+
+    static getSize() {
+        const stats = fs.statSync(dbSource);
+        const fileSizeInBytes = stats.size;
+
+        return fileSizeInBytes / 1000000.0;
+    }
 }
 
-module.exports = new Database();
+module.exports = Database;
